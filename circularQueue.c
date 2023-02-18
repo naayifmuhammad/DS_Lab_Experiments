@@ -1,9 +1,9 @@
 #include <stdio.h>
 
-#define size 5
+#define maxSize 20
 
-int queue[size];
-int f = -1, r = -1;
+int queue[maxSize];
+int size, f = -1, r = -1;
 
 void enqueue();
 void display();
@@ -14,7 +14,8 @@ void main()
 {
 
     int choice;
-
+    printf("Enter the size of the circular queue you want to create: ");
+    scanf("%d", &size);
     printf("\n*************Circular Queue Using Array*************");
 
     do
@@ -66,7 +67,7 @@ void enqueue()
     }
     else if (f == (r + 1) % size)
     {
-        printf("Queue is full");
+        printf("\nQueue is full");
     }
     else
     {
@@ -82,12 +83,12 @@ void dequeue()
 
     if (f == -1 && r == -1)
     {
-        printf("Queue is empty");
+        printf("\nQueue is empty");
     }
     else
     {
 
-        printf("Deleted Element is %d :", queue[f]);
+        printf("Deleted Element is [%d] :", queue[f]);
 
         if (f == r)
         {
@@ -111,7 +112,7 @@ void display()
         printf("Queue is empty");
     else
     {
-        printf("Queue Element are");
+        printf("Circular queue elements are: \n");
         while (i != r)
         {
             printf("%d\t", queue[i]);
