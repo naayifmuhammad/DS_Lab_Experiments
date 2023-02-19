@@ -109,7 +109,7 @@ void DeleteAtBeginning()
         tmp = head;
         printf("\n%d is Deleted ", tmp->data);
         head = tmp->next;
-        tmp->prev = NULL;
+        head->prev = NULL;
         free(tmp);
     }
 }
