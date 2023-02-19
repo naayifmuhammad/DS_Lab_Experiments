@@ -3,12 +3,11 @@
 
 struct node
 {
-
     int data;
     struct node *next, *prev;
 };
 
-struct node *temp = NULL, *head = NULL;
+struct node *temp = NULL, *head = NULL, *latest = NULL, *newnode;
 
 void Display();
 void InsertAtEnd();
@@ -156,8 +155,6 @@ void DeleteAtPosition()
 
 void InsertAtPosition()
 {
-
-    struct node *newnode;
     int pos, i = 1;
     printf("\n Enter the position");
     scanf("%d", &pos);
@@ -203,11 +200,11 @@ void InsertAtEnd()
         temp = temp->next;
     }
     temp->next = newnode;
+    newnode->prev = temp;
 }
 
 void InsertAtBeginning()
 {
-    struct node *newnode;
     newnode = (struct node *)malloc(sizeof(struct node));
     printf("\nEnter the data to insert at the beginning: ");
     scanf("%d", &newnode->data);
