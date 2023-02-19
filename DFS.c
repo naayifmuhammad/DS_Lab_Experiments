@@ -17,11 +17,11 @@ void main()
     scanf("%d", &startingVertex);
     DFS(startingVertex);
 }
-void DFS(int i)
+void DFS(int v)
 {
     int j;
-    printf("\n%d", i);
-    visited[i] = 1;
+    printf("\n%d", v);
+    visited[v] = 1;
     for (j = 1; j <= n; j++)
         if (!visited[j] && G[i][j] == 1)
             DFS(j);
