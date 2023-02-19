@@ -17,6 +17,8 @@ void DeleteAtEnd();
 void DeleteAtBeginning();
 void DeleteAtPosition();
 void Search();
+void readNodeData();
+int isEmpty();
 
 void main()
 {
@@ -25,15 +27,15 @@ void main()
     do
     {
 
-        printf("\n\n\t 0.Exit");
-        printf("\n\t 1.Insert At Begining");
-        printf("\n\t 2.Insert At End");
-        printf("\n\t 3.Insert At Particular Position");
-        printf("\n\t 4.Delete At Begining");
-        printf("\n\t 5.Delete At End");
-        printf("\n\t 6.Delete At Particular Position");
-        printf("\n\t 7.Search");
-        printf("\n\t 8.Display\n");
+        printf("\n0.Exit");
+        printf("  1.Insert At Beginning");
+        printf("  2.Insert At End");
+        printf("  3.Insert At Position");
+        printf("  4.Delete At Beginning");
+        printf("  5.Delete At End");
+        printf("  6.Delete At Position");
+        printf("  7.Search");
+        printf("  8.Display\n\n");
 
         scanf("%d", &choice);
 
@@ -45,12 +47,15 @@ void main()
             break;
 
         case 1:
+            readNodeData();
             InsertAtBeginning();
             break;
         case 2:
+            readNodeData();
             InsertAtEnd();
             break;
         case 3:
+            readNodeData();
             InsertAtPosition();
             break;
         case 4:
@@ -80,8 +85,8 @@ void DeleteAtEnd()
 {
     struct node *ptr;
 
-    if (head == NULL)
-        printf("Linked list is Empty");
+    if (isEmpty())
+        return;
     else
     {
         temp = head;
@@ -101,8 +106,8 @@ void DeleteAtBeginning()
 
     struct node *tmp;
 
-    if (head == NULL)
-        printf("Linked list is Empty");
+    if (isEmpty())
+        return;
     else
     {
 
@@ -120,8 +125,8 @@ void DeleteAtPosition()
     int pos, i = 1;
     struct node *ptr;
 
-    if (head == NULL)
-        printf("Linked list is Empty");
+    if (isEmpty())
+        return;
     else
     {
         printf("\n Enter the position: ");
@@ -135,6 +140,11 @@ void DeleteAtPosition()
 
         while (i < pos)
         {
+            if (temp == NULL)
+            {
+                printf("Deletion at that position is not possible");
+                return;
+            }
             ptr = temp;
             temp = temp->next;
             i++;
@@ -156,21 +166,22 @@ void DeleteAtPosition()
 void InsertAtPosition()
 {
     int pos, i = 1;
-    printf("\n Enter the position");
+    printf("\n Enter the position for insertion: ");
     scanf("%d", &pos);
     if (pos == 1 || head == NULL)
     {
         InsertAtBeginning();
         return;
     }
-    newnode = (struct node *)malloc(sizeof(struct node));
-    printf("\n Enter the data want to insert: ");
-    scanf("%d", &newnode->data);
-    newnode->next = NULL;
-    newnode->prev = NULL;
     temp = head;
     while (i < pos - 1)
     {
+        if (temp->next == NULL)
+        {
+            printf("Insertion at that position is not possible: Inserting at end  of list instead: ");
+            InsertAtEnd();
+            return;
+        }
         temp = temp->next;
         i++;
     }
@@ -186,34 +197,16 @@ void InsertAtEnd()
         InsertAtBeginning();
         return;
     }
-    struct node *newnode;
-    newnode = (struct node *)malloc(sizeof(struct node));
-
-    printf("\nEnter the data to insert at the end of list: ");
-    scanf("%d", &newnode->data);
-    newnode->next = NULL;
-    newnode->prev = NULL;
-
-    temp = head;
-    while (temp->next != NULL)
-    {
-        temp = temp->next;
-    }
-    temp->next = newnode;
-    newnode->prev = temp;
+    latest->next = newnode;
+    newnode->prev = latest;
+    latest = latest->next;
 }
 
 void InsertAtBeginning()
 {
-    newnode = (struct node *)malloc(sizeof(struct node));
-    printf("\nEnter the data to insert at the beginning: ");
-    scanf("%d", &newnode->data);
-    newnode->next = NULL;
-    newnode->prev = NULL;
-
     if (head == NULL)
     {
-        head = temp = newnode;
+        head = latest = newnode;
     }
     else
     {
@@ -225,7 +218,8 @@ void InsertAtBeginning()
 
 void Display()
 {
-
+    if (isEmpty())
+        return;
     printf("\n******The List data****\n");
 
     temp = head;
@@ -238,6 +232,8 @@ void Display()
 }
 void Search()
 {
+    if (isEmpty())
+        return;
     int key, flag = 0, pos = 1;
     printf("Enter the key value to search for: ");
     scanf("%d", &key);
@@ -259,6 +255,24 @@ void Search()
     }
     else
     {
-        printf("The key value is not found in the linked list");
+        printf("The key value not found in the linked list");
     }
+}
+
+void readNodeData()
+{
+    newnode = (struct node *)malloc(sizeof(struct node));
+    printf("\nEnter data for new node: ");
+    scanf("%d", &newnode->data);
+    newnode->next = newnode->prev = NULL;
+}
+int isEmpty()
+{
+    if (head == NULL)
+    {
+        printf("Linked list is empty");
+        return (1);
+    }
+    else
+        return (0);
 }
