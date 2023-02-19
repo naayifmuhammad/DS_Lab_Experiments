@@ -23,6 +23,6 @@ void DFS(int v)
     printf("\n%d", v);
     visited[v] = 1;
     for (i = 1; i <= n; i++)
-        if (!visited[i] && G[v][i] == 1)
+        if (!visited[i] && G[v][i])
             DFS(i);
 }
