@@ -24,5 +24,5 @@ void DFS(int v)
     visited[v] = 1;
     for (i = 1; i <= n; i++)
         if (!visited[i] && G[v][i] == 1)
-            DFS(j);
+            DFS(i);
 }
