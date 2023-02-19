@@ -19,10 +19,10 @@ void main()
 }
 void DFS(int v)
 {
-    int j;
+    int i;
     printf("\n%d", v);
     visited[v] = 1;
-    for (j = 1; j <= n; j++)
-        if (!visited[j] && G[i][j] == 1)
+    for (i = 1; i <= n; i++)
+        if (!visited[i] && G[v][i] == 1)
             DFS(j);
 }
