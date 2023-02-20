@@ -25,11 +25,11 @@ void main()
     do
     {
 
-        printf("\n\t 0.Exit");
-        printf("\n\t 1.Push");
-        printf("\n\t 2.Pop");
-        printf("\n\t 3.Top");
-        printf("\n\t 4.Display\n\n");
+        printf("\n 0.Exit");
+        printf(" 1.Push");
+        printf(" 2.Pop");
+        printf(" 3.Top");
+        printf(" 4.Display\n\n");
 
         scanf("%d", &choice);
 
@@ -64,26 +64,15 @@ void main()
 
 void pop()
 {
-
-    struct node *prev;
-
     if (head == NULL)
-        printf("Stack Is Empty - Underflow\n");
-    else if (head->next == NULL)
     {
-        printf("\n%d is Deleted ", head->data);
-        free(head);
-        head = NULL;
+        printf("Underflow");
     }
     else
     {
-        while (temp->next != NULL)
-        {
-            prev = temp;
-            temp = temp->next;
-        }
-        prev->next = NULL;
-        printf("\n%d is Deleted ", temp->data);
+        printf("Popped element : [%d]", head->data);
+        temp = head;
+        head = head->next;
         free(temp);
     }
 }
@@ -93,16 +82,11 @@ void top()
 
     struct node *tmp;
 
-    if (head == 0)
+    if (head == NULL)
         printf("Stack Is Empty");
     else
     {
-
-        while (temp->next != NULL)
-        {
-            temp = temp->next;
-        }
-        printf("\n Top element is %d : ", temp->data);
+        printf("top element is : [%d]", head->data);
     }
 }
 
@@ -112,26 +96,20 @@ void push()
     struct node *newnode;
     int data;
 
-    newnode = (struct node *)malloc(sizeof(struct node *));
+    newnode = (struct node *)malloc(sizeof(struct node));
 
-    printf("\n Enter the data want to insert: ");
-    scanf("%d", &data);
-    newnode->data = data;
+    printf("\n Enter the data you want to insert: ");
+    scanf("%d", &newnode->data);
     newnode->next = NULL;
 
     if (head == NULL)
     {
         head = newnode;
-        temp = newnode;
     }
     else
     {
-        while (temp->next != NULL)
-        {
-            temp = temp->next;
-        }
-        temp->next = newnode;
-        temp = newnode;
+        newnode->next = head;
+        head = newnode;
     }
 }
 
