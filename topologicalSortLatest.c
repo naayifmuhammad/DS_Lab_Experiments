@@ -2,36 +2,17 @@
 
 #define maxsize 20
 
-int a[maxsize][maxsize], visited[maxsize], stack[maxsize], top = 0, n;
+int a[maxsize][maxsize] = {0}, visited[maxsize] = {0}, stack[maxsize] = {0}, top = 0, n;
 
 void readAdjMatrix();
 void topologicalSort();
-void initArrays();
 void topologicalSortRecursion(int);
 void main()
 {
     printf("Enter the number of vertices in your graph: ");
     scanf("%d", &n);
-    initArrays();
     readAdjMatrix();
     topologicalSort();
-}
-
-void initArrays()
-{
-    int i, j;
-    for (i = 1; i <= n; i++)
-    {
-        for (j = 0; j <= n; j++)
-        {
-            a[i][j] = 0;
-        }
-    }
-    for (i = 1; i <= n; i++)
-    {
-        visited[i] = 0;
-        stack[i] = 0;
-    }
 }
 
 void readAdjMatrix()
